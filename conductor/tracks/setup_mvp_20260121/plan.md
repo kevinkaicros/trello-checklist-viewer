@@ -40,11 +40,11 @@
     - [ ] Sub-task: Optimistic UI update for immediate feedback
 - [x] Task: Conductor - User Manual Verification 'Interaction & Updates' (Protocol in workflow.md) [e4f6f01]
 
-## Phase 5: Final Polish
-- [~] Task: Styling & Consistency Review
+## Phase 5: Final Polish [checkpoint: 6ee459f]
+- [x] Task: Styling & Consistency Review [6ee459f]
     - [ ] Sub-task: Ensure UI matches Trello native styles
     - [ ] Sub-task: Verify alphabetical sorting of groups
-- [~] Task: Final Testing
+- [x] Task: Final Testing [6ee459f]
     - [ ] Sub-task: Run full suite of unit tests
     - [ ] Sub-task: Manual smoke test of the full flow
-- [ ] Task: Conductor - User Manual Verification 'Final Polish' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Final Polish' (Protocol in workflow.md) [6ee459f]

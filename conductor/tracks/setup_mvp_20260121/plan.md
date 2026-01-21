@@ -12,10 +12,10 @@
 - [x] Task: Conductor - User Manual Verification 'Infrastructure & Setup' (Protocol in workflow.md) [18f6855]
 
 ## Phase 2: Core Logic Implementation (TDD)
-- [ ] Task: Implement Data Fetching Logic
+- [~] Task: Implement Data Fetching Logic
     - [ ] Sub-task: Write tests for fetching cards/checklists (mocked)
     - [ ] Sub-task: Implement Trello API calls to fetch relevant data
-- [ ] Task: Implement Filtering & Grouping Logic
+- [~] Task: Implement Filtering & Grouping Logic
     - [ ] Sub-task: Write tests for filtering by @username
     - [ ] Sub-task: Write tests for grouping by Label Name
     - [ ] Sub-task: Implement `filterAndGroupItems` utility function

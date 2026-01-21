@@ -21,17 +21,17 @@
     - [ ] Sub-task: Implement `filterAndGroupItems` utility function
 - [x] Task: Conductor - User Manual Verification 'Core Logic Implementation (TDD)' (Protocol in workflow.md) [6f07862]
 
-## Phase 3: UI Construction
-- [~] Task: Build Search Component
+## Phase 3: UI Construction [checkpoint: fb54983]
+- [x] Task: Build Search Component [fb54983]
     - [ ] Sub-task: Create SearchBar UI component
     - [ ] Sub-task: Handle user input state
-- [~] Task: Build Checklist Display Components
+- [x] Task: Build Checklist Display Components [fb54983]
     - [ ] Sub-task: Create ProjectGroup (Accordion/Header) component
     - [ ] Sub-task: Create ChecklistItem component with checkbox
-- [~] Task: Integrate Logic with UI
+- [x] Task: Integrate Logic with UI [fb54983]
     - [ ] Sub-task: Connect SearchBar to Filtering Logic
     - [ ] Sub-task: Render grouped results in the main view
-- [ ] Task: Conductor - User Manual Verification 'UI Construction' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'UI Construction' (Protocol in workflow.md) [fb54983]
 
 ## Phase 4: Interaction & Updates
 - [ ] Task: Implement Status Toggling

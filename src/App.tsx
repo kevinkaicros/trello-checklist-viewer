@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import SearchBar from './components/SearchBar';
 import ProjectGroup from './components/ProjectGroup';
-import { fetchAllCardsWithChecklists, type TrelloCard } from './services/data-fetching';
+import { fetchAllCardsWithChecklists, updateChecklistItemState, type TrelloCard } from './services/data-fetching';
 import { filterAndGroupItems, type GroupedItems, type FlatChecklistItem } from './services/logic';
 import { t } from './services/trello';
 import { MOCK_CARDS } from './services/mock-data';
@@ -55,8 +55,6 @@ function App() {
   };
 
   const handleToggle = async (item: FlatChecklistItem) => {
-    if (!t) return;
-
     const newState = item.state === 'complete' ? 'incomplete' : 'complete';
     
     // Optimistic UI update
@@ -66,6 +64,13 @@ function App() {
         i.itemId === item.itemId ? { ...i, state: newState } : i
       )
     })));
+
+    if (import.meta.env.DEV) {
+      console.log(`[DEV] Mock update item ${item.itemId} to ${newState}`);
+      return;
+    }
+
+    if (!t) return;
 
     try {
       await updateChecklistItemState(t, item.cardId, item.checklistId, item.itemId, newState);

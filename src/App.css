@@ -1,42 +1,101 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+.app-container {
+  max-width: 100%;
+  padding: 12px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
+
+.app-header {
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--ds-border);
+  padding-bottom: 12px;
+}
+
+.app-header h1 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 12px 0;
+  color: var(--ds-text);
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 8px 12px;
+  border: 2px solid var(--ds-border);
+  border-radius: 3px;
+  background-color: #fafbfc;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.search-bar input:focus {
+  background-color: #ffffff;
+  border-color: var(--ds-background-brand-bold);
+  outline: none;
+}
+
+.status-message {
+  color: var(--ds-text-subtle);
+  font-style: italic;
   text-align: center;
+  margin-top: 20px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Project Group */
+.project-group {
+  margin-bottom: 24px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.project-header {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ds-text-subtle);
+  margin: 0 0 8px 0;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--ds-border);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.card {
-  padding: 2em;
+/* Checklist Item */
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 6px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.1s ease;
 }
 
-.read-the-docs {
-  color: #888;
+.checklist-item:hover {
+  background-color: var(--ds-background-neutral-subtle);
+}
+
+.checklist-item input[type="checkbox"] {
+  margin-right: 12px;
+  margin-top: 3px;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-weight: 500;
+  color: var(--ds-text);
+}
+
+.card-name {
+  font-size: 12px;
+  color: var(--ds-text-subtle);
+  margin-top: 2px;
 }

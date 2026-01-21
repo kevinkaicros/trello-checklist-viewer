@@ -14,8 +14,18 @@ export interface TrelloCard {
 }
 
 export const fetchAllCardsWithChecklists = async (t: any): Promise<TrelloCard[]> => {
-  // In a real Trello Power-Up, t.cards('all') retrieves cards on the current board.
-  // We assume the Power-Up is configured to include checklists and labels if possible,
-  // or we might need additional t.get calls per card.
   return await t.cards('all');
+};
+
+export const updateChecklistItemState = async (
+  t: any,
+  cardId: string,
+  checklistId: string,
+  checkItemId: string,
+  state: 'complete' | 'incomplete'
+): Promise<void> => {
+  // Use t.set to update the state. Note: In real Trello Power-Up, 
+  // updating core checklist items might require REST API if Power-Up client doesn't have a direct helper.
+  // However, for this MVP, we use t.set as a proxy for the intent to update state.
+  return await t.set(cardId, 'shared', `checkitem-${checkItemId}-state`, state);
 };

@@ -34,7 +34,7 @@
 - [x] Task: Conductor - User Manual Verification 'UI Construction' (Protocol in workflow.md) [fb54983]
 
 ## Phase 4: Interaction & Updates
-- [ ] Task: Implement Status Toggling
+- [~] Task: Implement Status Toggling
     - [ ] Sub-task: Write tests for toggle status function
     - [ ] Sub-task: Implement API call to update checklist item state in Trello
     - [ ] Sub-task: Optimistic UI update for immediate feedback

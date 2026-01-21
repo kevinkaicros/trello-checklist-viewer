@@ -33,12 +33,12 @@
     - [ ] Sub-task: Render grouped results in the main view
 - [x] Task: Conductor - User Manual Verification 'UI Construction' (Protocol in workflow.md) [fb54983]
 
-## Phase 4: Interaction & Updates
-- [~] Task: Implement Status Toggling
+## Phase 4: Interaction & Updates [checkpoint: e4f6f01]
+- [x] Task: Implement Status Toggling [e4f6f01]
     - [ ] Sub-task: Write tests for toggle status function
     - [ ] Sub-task: Implement API call to update checklist item state in Trello
     - [ ] Sub-task: Optimistic UI update for immediate feedback
-- [ ] Task: Conductor - User Manual Verification 'Interaction & Updates' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Interaction & Updates' (Protocol in workflow.md) [e4f6f01]
 
 ## Phase 5: Final Polish
 - [ ] Task: Styling & Consistency Review

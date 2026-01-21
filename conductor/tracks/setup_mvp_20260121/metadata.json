@@ -1,0 +1,8 @@
+{
+  "track_id": "setup_mvp_20260121",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-01-21T15:30:00Z",
+  "updated_at": "2026-01-21T15:30:00Z",
+  "description": "Create Checklist Viewer MVP with Infrastructure Setup"
+}

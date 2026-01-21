@@ -1,9 +1,18 @@
-import { render, screen } from '@testing-library/react'
-import App from './App'
+import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi } from 'vitest';
+import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />)
-  // The default scaffolded App.tsx usually has "Vite + React" text
-  // Let's check the content of App.tsx first or just test basic rendering
-  expect(true).toBeTruthy()
-})
+// Mock Trello Service
+vi.mock('./services/trello', () => ({
+  initializePowerUp: vi.fn(),
+  t: {
+    cards: vi.fn().mockResolvedValue([]),
+  },
+}));
+
+describe('App Integration', () => {
+  it('renders search bar', () => {
+    render(<App />);
+    expect(screen.getByPlaceholderText(/Search username/i)).toBeInTheDocument();
+  });
+});

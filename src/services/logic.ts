@@ -1,4 +1,4 @@
-import { TrelloCard } from './data-fetching';
+import type { TrelloCard } from './data-fetching';
 
 export interface GroupedItems {
   projectName: string;

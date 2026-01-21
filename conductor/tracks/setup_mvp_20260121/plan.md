@@ -22,13 +22,13 @@
 - [x] Task: Conductor - User Manual Verification 'Core Logic Implementation (TDD)' (Protocol in workflow.md) [6f07862]
 
 ## Phase 3: UI Construction
-- [ ] Task: Build Search Component
+- [~] Task: Build Search Component
     - [ ] Sub-task: Create SearchBar UI component
     - [ ] Sub-task: Handle user input state
-- [ ] Task: Build Checklist Display Components
+- [~] Task: Build Checklist Display Components
     - [ ] Sub-task: Create ProjectGroup (Accordion/Header) component
     - [ ] Sub-task: Create ChecklistItem component with checkbox
-- [ ] Task: Integrate Logic with UI
+- [~] Task: Integrate Logic with UI
     - [ ] Sub-task: Connect SearchBar to Filtering Logic
     - [ ] Sub-task: Render grouped results in the main view
 - [ ] Task: Conductor - User Manual Verification 'UI Construction' (Protocol in workflow.md)

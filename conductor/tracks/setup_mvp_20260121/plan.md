@@ -5,7 +5,7 @@
     - [ ] Sub-task: Scaffold Vite + React + TypeScript project
     - [ ] Sub-task: Setup ESLint and Prettier
     - [ ] Sub-task: Configure Vitest for unit testing
-- [ ] Task: Trello Integration Setup
+- [x] Task: Trello Integration Setup [b1e2a7a]
     - [ ] Sub-task: Install Trello Power-Up Client library
     - [ ] Sub-task: Configure basic Power-Up manifest (index.html, capability handling)
     - [ ] Sub-task: Implement basic TrelloClient wrapper service

@@ -1,6 +1,6 @@
 # Implementation Plan: Setup MVP
 
-## Phase 1: Infrastructure & Setup
+## Phase 1: Infrastructure & Setup [checkpoint: 18f6855]
 - [x] Task: Initialize Project Structure [6525be2]
     - [ ] Sub-task: Scaffold Vite + React + TypeScript project
     - [ ] Sub-task: Setup ESLint and Prettier
@@ -9,7 +9,7 @@
     - [ ] Sub-task: Install Trello Power-Up Client library
     - [ ] Sub-task: Configure basic Power-Up manifest (index.html, capability handling)
     - [ ] Sub-task: Implement basic TrelloClient wrapper service
-- [ ] Task: Conductor - User Manual Verification 'Infrastructure & Setup' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Infrastructure & Setup' (Protocol in workflow.md) [18f6855]
 
 ## Phase 2: Core Logic Implementation (TDD)
 - [ ] Task: Implement Data Fetching Logic

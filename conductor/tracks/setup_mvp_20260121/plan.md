@@ -11,15 +11,15 @@
     - [ ] Sub-task: Implement basic TrelloClient wrapper service
 - [x] Task: Conductor - User Manual Verification 'Infrastructure & Setup' (Protocol in workflow.md) [18f6855]
 
-## Phase 2: Core Logic Implementation (TDD)
-- [~] Task: Implement Data Fetching Logic
+## Phase 2: Core Logic Implementation (TDD) [checkpoint: 6f07862]
+- [x] Task: Implement Data Fetching Logic [6f07862]
     - [ ] Sub-task: Write tests for fetching cards/checklists (mocked)
     - [ ] Sub-task: Implement Trello API calls to fetch relevant data
-- [~] Task: Implement Filtering & Grouping Logic
+- [x] Task: Implement Filtering & Grouping Logic [6f07862]
     - [ ] Sub-task: Write tests for filtering by @username
     - [ ] Sub-task: Write tests for grouping by Label Name
     - [ ] Sub-task: Implement `filterAndGroupItems` utility function
-- [ ] Task: Conductor - User Manual Verification 'Core Logic Implementation (TDD)' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Core Logic Implementation (TDD)' (Protocol in workflow.md) [6f07862]
 
 ## Phase 3: UI Construction
 - [ ] Task: Build Search Component

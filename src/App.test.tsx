@@ -2,9 +2,14 @@ import { render, screen } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import App from './App';
 
-// Mock Trello Service
+// Mock Hooks
+vi.mock('./hooks/useTrelloData', () => ({
+  useBoardMembers: vi.fn().mockReturnValue({ members: [], loading: false }),
+  useMemberChecklists: vi.fn().mockReturnValue({ cards: [], loading: false, setCards: vi.fn() }),
+}));
+
 vi.mock('./services/trello', () => ({
-  getTrello: vi.fn(), // Mock getTrello instead of initializePowerUp/t directly if that's what App uses
+  getTrello: vi.fn(),
 }));
 
 describe('App Integration', () => {

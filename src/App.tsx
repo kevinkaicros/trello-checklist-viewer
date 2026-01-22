@@ -1,68 +1,46 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { MemberSelector } from './components/MemberSelector';
 import ProjectGroup from './components/ProjectGroup';
-import { fetchAllCardsWithChecklists, updateChecklistItemState, type TrelloCard } from './services/data-fetching';
-import { filterAndGroupItems, type GroupedItems, type FlatChecklistItem } from './services/logic';
+import { updateChecklistItemState } from './services/data-fetching';
+import { filterAndGroupItems, type FlatChecklistItem } from './services/logic';
 import { getTrello } from './services/trello';
-import { MOCK_CARDS, MOCK_MEMBERS } from './services/mock-data';
+import { useBoardMembers, useMemberChecklists } from './hooks/useTrelloData';
 
 function App() {
-  const [cards, setCards] = useState<TrelloCard[]>([]);
-  const [groupedItems, setGroupedItems] = useState<GroupedItems[]>([]);
-  const [loading, setLoading] = useState(true);
   const [selectedMember, setSelectedMember] = useState<TrelloMember | null>(null);
+  
+  const { members } = useBoardMembers();
+  const { cards, loading: cardsLoading, setCards } = useMemberChecklists(selectedMember?.username || null);
 
-  useEffect(() => {
-    const loadData = async () => {
-      // In development mode, force mock data to avoid Trello client timeout issues
-      if (import.meta.env.DEV) {
-        console.log('Development mode detected, using mock data.');
-        setCards(MOCK_CARDS);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const t = getTrello();
-        if (t) {
-          try {
-            const data = await fetchAllCardsWithChecklists(t);
-            setCards(data);
-          } catch (apiErr) {
-            console.warn('Trello API call failed, using mock data.', apiErr);
-            setCards(MOCK_CARDS);
-          }
-        } else {
-          console.log('No Trello instance detected, using mock data.');
-          setCards(MOCK_CARDS);
-        }
-      } catch (err) {
-        console.error('Unexpected error loading data', err);
-        setCards(MOCK_CARDS);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadData();
-  }, []);
+  const groupedItems = selectedMember 
+    ? filterAndGroupItems(cards, selectedMember.username) 
+    : [];
 
   const handleSelectMember = (member: TrelloMember) => {
     setSelectedMember(member);
-    const filtered = filterAndGroupItems(cards, member.username);
-    setGroupedItems(filtered);
   };
 
   const handleToggle = async (item: FlatChecklistItem) => {
     const newState = item.state === 'complete' ? 'incomplete' : 'complete';
     
     // Optimistic UI update
-    setGroupedItems(prev => prev.map(group => ({
-      ...group,
-      items: group.items.map(i => 
-        i.itemId === item.itemId ? { ...i, state: newState } : i
-      )
-    })));
+    setCards(prevCards => prevCards.map(card => {
+      if (card.id !== item.cardId) return card;
+      return {
+        ...card,
+        checklists: card.checklists.map(cl => {
+          if (cl.id !== item.checklistId) return cl;
+          return {
+            ...cl,
+            checkItems: cl.checkItems.map(ci => {
+              if (ci.id !== item.itemId) return ci;
+              return { ...ci, state: newState };
+            })
+          };
+        })
+      };
+    }));
 
     if (import.meta.env.DEV) {
       console.log(`[DEV] Mock update item ${item.itemId} to ${newState}`);
@@ -76,13 +54,7 @@ function App() {
       await updateChecklistItemState(t, item.cardId, item.checklistId, item.itemId, newState);
     } catch (err) {
       console.error('Failed to update item state', err);
-      // Rollback on error
-      setGroupedItems(prev => prev.map(group => ({
-        ...group,
-        items: group.items.map(i => 
-          i.itemId === item.itemId ? { ...i, state: item.state } : i
-        )
-      })));
+      // Optional: Rollback state here
     }
   };
 
@@ -91,14 +63,14 @@ function App() {
       <header className="app-header">
         <h1>Checklist Viewer</h1>
         <MemberSelector 
-          members={MOCK_MEMBERS}
+          members={members}
           onSelect={handleSelectMember}
           selectedMember={selectedMember}
         />
       </header>
 
       <main className="app-content">
-        {loading ? (
+        {cardsLoading ? (
           <div className="status-message">Loading Trello data...</div>
         ) : groupedItems.length > 0 ? (
           groupedItems.map((group) => (

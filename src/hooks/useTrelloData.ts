@@ -78,5 +78,5 @@ export const useMemberChecklists = (memberUsername: string | null) => {
     loadChecklists();
   }, [memberUsername]);
 
-  return { cards, loading, error };
+  return { cards, loading, error, setCards };
 };

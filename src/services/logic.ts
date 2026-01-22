@@ -1,5 +1,3 @@
-import type { TrelloCard } from './data-fetching';
-
 export interface GroupedItems {
   projectName: string;
   items: FlatChecklistItem[];
@@ -50,7 +48,8 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
     if (!groups[pName]) {
       groups[pName] = [];
     }
-    const { projectName, ...rest } = item;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { projectName: _projectName, ...rest } = item;
     groups[pName].push(rest);
   });
 

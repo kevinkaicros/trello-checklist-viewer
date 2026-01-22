@@ -10,7 +10,7 @@ export const initializePowerUp = () => {
 
   console.log('Trello Power-Up: window.TrelloPowerUp found. Initializing...');
   window.TrelloPowerUp.initialize({
-    'board-buttons': function (_t: any) {
+    'board-buttons': function () {
       console.log('Trello Power-Up: board-buttons requested');
       return [{
         icon: {

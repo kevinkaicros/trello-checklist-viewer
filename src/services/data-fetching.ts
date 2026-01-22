@@ -20,8 +20,8 @@ export const fetchAllCardsWithChecklists = async (t: any): Promise<TrelloCard[]>
 };
 
 export const updateChecklistItemState = async (
-  t: any,
-  cardId: string,
+  _t: any,
+  _cardId: string,
   _checklistId: string,
   checkItemId: string,
   state: 'complete' | 'incomplete'

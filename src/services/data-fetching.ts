@@ -16,8 +16,12 @@ export const fetchBoardMembers = async (t: TrelloInstance): Promise<TrelloMember
 };
 
 export const fetchAllCardsWithChecklists = async (t: TrelloInstance): Promise<TrelloCard[]> => {
-  // Use 'all' to ensure we get checklists with their checkItems
-  return await t.cards('all');
+  // In Trello Power-Up client library, t.cards('all') usually returns checklists, 
+  // but checkItems might need to be explicitly requested or fetched per card.
+  // However, t.cards('id', 'name', 'checklists') is another pattern.
+  // According to some Power-Up docs, 'all' should include them, but let's try to be explicit
+  // if 'all' is failing to provide checkItems.
+  return await t.cards('id', 'name', 'checklists', 'labels', 'members');
 };
 
 export const updateChecklistItemState = async (

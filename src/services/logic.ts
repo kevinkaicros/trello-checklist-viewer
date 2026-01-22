@@ -42,9 +42,15 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
     
     if (card.checklists) {
       card.checklists.forEach((checklist) => {
-        // Trello API can sometimes use 'checkItems' or just 'items'
+        // Trello Power-Up client library often returns checklist items in 'checkItems' 
+        // but it might be 'items' depending on the API version or field mapping.
         const items = checklist.checkItems || (checklist as unknown as { items: TrelloCheckItem[] }).items;
         
+        // Debugging log for checkItems within checklists
+        if (!items || items.length === 0) {
+           console.log(`[Filter] Checklist ${checklist.id} in Card ${card.id} has no items.`, checklist);
+        }
+
         if (items && Array.isArray(items)) {
           items.forEach((item: TrelloCheckItem) => {
             // Check for direct username match or @username match in item name

@@ -16,31 +16,24 @@ export const fetchBoardMembers = async (t: TrelloInstance): Promise<TrelloMember
 };
 
 export const fetchAllCardsWithChecklists = async (t: TrelloInstance): Promise<TrelloCard[]> => {
-  // Step 1: Fetch all visible cards with their basic checklist metadata
-  const cards = await t.cards('id', 'name', 'checklists', 'labels', 'members');
-  
-  // Step 2: For cards that have checklists, fetch the full checklist data (including checkItems)
-  // t.cards() often omits checkItems for performance, so we fetch them per-card.
-  const cardsWithFullChecklists = await Promise.all(
-    cards.map(async (card) => {
-      if (card.checklists && card.checklists.length > 0) {
-        try {
-          // Fetching specific card fields, including 'checklists' which contains checkItems
-          const fullCardData = await t.card(card.id, 'checklists');
-          return {
-            ...card,
-            checklists: fullCardData.checklists || [],
-          };
-        } catch (err) {
-          console.warn(`Failed to fetch full checklists for card ${card.id}`, err);
-          return card;
-        }
-      }
-      return card;
-    })
-  );
+  try {
+    const restApi = t.getRestApi();
+    if (await restApi.isAuthorized()) {
+      const board = await t.board('id');
+      // Use REST API to fetch cards with full checklists (including checkItems) in one request
+      return await restApi.get(`boards/${board.id}/cards`, {
+        checklists: 'all',
+        fields: 'name,labels,members',
+        member_fields: 'fullName,username,avatar',
+        labels: 'all'
+      });
+    }
+  } catch (err) {
+    console.warn('REST API not available or not authorized, falling back to t.cards()', err);
+  }
 
-  return cardsWithFullChecklists;
+  // Fallback to Power-Up client library (likely missing checkItems)
+  return await t.cards('id', 'name', 'checklists', 'labels', 'members');
 };
 
 export const updateChecklistItemState = async (

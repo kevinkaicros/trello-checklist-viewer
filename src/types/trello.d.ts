@@ -6,10 +6,17 @@ interface TrelloPowerUp {
 interface TrelloInstance {
   board: (...fields: string[]) => Promise<Record<string, unknown>>; // Result structure varies by field
   cards: (...fields: string[]) => Promise<TrelloCard[]>;
-  card: (idOrField: string, ...fields: string[]) => Promise<TrelloCard>;
+  card: (...fields: string[]) => Promise<TrelloCard>;
   modal: (options: Record<string, unknown>) => Promise<void>;
   get: (scope: string, visibility: string, key: string) => Promise<unknown>;
   set: (scope: string, visibility: string, key: string, value: unknown) => Promise<void>;
+  getRestApi: () => TrelloRestApi;
+}
+
+interface TrelloRestApi {
+  isAuthorized: () => Promise<boolean>;
+  authorize: (options?: Record<string, unknown>) => Promise<string>;
+  get: (path: string, params?: Record<string, unknown>) => Promise<any>;
 }
 
 interface Window {

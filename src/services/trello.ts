@@ -1,3 +1,6 @@
+import iconDark from '../assets/viewer-icon-dark.svg';
+import iconLight from '../assets/viewer-icon-light.svg';
+
 export const initializePowerUp = () => {
   console.log('Trello Power-Up: Attempting initialization...');
   if (!window.TrelloPowerUp) {
@@ -11,10 +14,10 @@ export const initializePowerUp = () => {
       console.log('Trello Power-Up: board-buttons requested');
       return [{
         icon: {
-          dark: './viewer-icon.svg',
-          light: './viewer-icon.svg',
+          dark: iconDark,
+          light: iconLight,
         },
-        text: 'Checklist Viewer',
+        text: '清單 Viewer',
         callback: function (t: any) {
           console.log('Trello Power-Up: Button clicked');
           // Append ?modal=true to differentiate context

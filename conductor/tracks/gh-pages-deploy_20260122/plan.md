@@ -17,7 +17,7 @@
 - [ ] Task: Execute initial deployment and verify URL
     - [ ] 推送程式碼至 GitHub 觸發 Actions
     - [ ] 驗證 GitHub Pages 是否成功顯示 Vite 預設頁面或 App 內容
-- [ ] Task: Create Trello Integration Guide (DEPLOY.md)
+- [x] Task: Create Trello Integration Guide (DEPLOY.md) df9f0f4
     - [ ] 撰寫如何獲取 GitHub Pages URL 的說明
     - [ ] 撰寫如何在 Trello 開發者後台更新 Connector URL 與開啟 Board Buttons 權限的指引
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Deployment & Documentation' (Protocol in workflow.md)

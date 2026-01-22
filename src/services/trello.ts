@@ -29,4 +29,21 @@ export const initializePowerUp = () => {
   console.log('Trello Power-Up: Initialization called.');
 };
 
-export const t = window.TrelloPowerUp ? window.TrelloPowerUp.iframe() : null;
+let tInstance: any = null;
+
+export const getTrello = () => {
+  if (tInstance) return tInstance;
+  if (window.TrelloPowerUp) {
+    // Only call iframe() if we haven't successfully initialized as a connector?
+    // Or just call it lazily.
+    // NOTE: If this is the connector iframe, calling iframe() MIGHT confuse Trello if done too early.
+    // But since this is lazy, it happens in useEffect.
+    try {
+        tInstance = window.TrelloPowerUp.iframe();
+    } catch (e) {
+        console.warn("Failed to initialize Trello iframe (this might be the connector iframe):", e);
+    }
+    return tInstance;
+  }
+  return null;
+};

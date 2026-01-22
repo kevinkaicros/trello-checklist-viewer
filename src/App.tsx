@@ -4,7 +4,7 @@ import SearchBar from './components/SearchBar';
 import ProjectGroup from './components/ProjectGroup';
 import { fetchAllCardsWithChecklists, updateChecklistItemState, type TrelloCard } from './services/data-fetching';
 import { filterAndGroupItems, type GroupedItems, type FlatChecklistItem } from './services/logic';
-import { t } from './services/trello';
+import { getTrello } from './services/trello';
 import { MOCK_CARDS } from './services/mock-data';
 
 function App() {
@@ -23,6 +23,7 @@ function App() {
       }
 
       try {
+        const t = getTrello();
         if (t) {
           try {
             const data = await fetchAllCardsWithChecklists(t);
@@ -70,6 +71,7 @@ function App() {
       return;
     }
 
+    const t = getTrello();
     if (!t) return;
 
     try {

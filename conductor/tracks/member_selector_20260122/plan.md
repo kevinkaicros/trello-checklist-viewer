@@ -26,7 +26,7 @@
     - [x] Sub-task: Write integration tests for the data fetching logic (mocking the Trello API client). 91435ad
 - [x] Task: Conductor - User Manual Verification 'Phase 2: Trello API Client & Data Fetching' (Protocol in workflow.md) 57d7404
 
-## Phase 3: End-to-End Integration & Polish
+## Phase 3: End-to-End Integration & Polish [checkpoint: b0cbec9]
 **Goal:** Connect the UI and API, ensuring the feature works as expected in the real environment.
 
 - [x] Task: Connect UI to Real API c88f1bc
@@ -36,4 +36,4 @@
 - [x] Task: Final Polish bb74e11
     - [x] Sub-task: Ensure "Loading" indicators are visible and styled correctly during API fetches. bb74e11
     - [x] Sub-task: Verify error handling (e.g., if API fails). bb74e11
-- [ ] Task: Conductor - User Manual Verification 'Phase 3: End-to-End Integration & Polish' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 3: End-to-End Integration & Polish' (Protocol in workflow.md) b0cbec9

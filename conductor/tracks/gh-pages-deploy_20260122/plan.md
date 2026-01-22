@@ -1,6 +1,6 @@
 # Implementation Plan - Deploy to GitHub Pages & Trello Integration
 
-## Phase 1: Deployment Configuration
+## Phase 1: Deployment Configuration [checkpoint: 7d01b95]
 此階段專注於調整專案設定與建立自動化流程。
 
 - [x] Task: Configure Vite for GitHub Pages base path 804b497
@@ -9,7 +9,7 @@
 - [x] Task: Create GitHub Actions deployment workflow 0b7b221
     - [ ] 建立 `.github/workflows/deploy.yml`
     - [ ] 定義建置與部署至 `gh-pages` 分支的步驟
-- [ ] Task: Conductor - User Manual Verification 'Phase 1: Deployment Configuration' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 1: Deployment Configuration' (Protocol in workflow.md) 7d01b95
 
 ## Phase 2: Deployment & Documentation
 此階段完成實際部署並產出整合說明文件。

@@ -1,5 +1,12 @@
 import type { TrelloCard } from './data-fetching';
 
+export const MOCK_MEMBERS: TrelloMember[] = [
+  { id: '1', fullName: 'Kai Yu Fan', username: 'kai', avatarUrl: 'https://placehold.co/30' },
+  { id: '2', fullName: 'User One', username: 'user1', avatarUrl: 'https://placehold.co/30' },
+  { id: '3', fullName: 'Bob Jones', username: 'bob', avatarUrl: 'https://placehold.co/30' },
+  { id: '4', fullName: 'Alice Smith', username: 'alice', avatarUrl: 'https://placehold.co/30' },
+];
+
 export const MOCK_CARDS: TrelloCard[] = [
   {
     id: 'card-1',

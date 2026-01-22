@@ -4,15 +4,12 @@ import App from './App';
 
 // Mock Trello Service
 vi.mock('./services/trello', () => ({
-  initializePowerUp: vi.fn(),
-  t: {
-    cards: vi.fn().mockResolvedValue([]),
-  },
+  getTrello: vi.fn(), // Mock getTrello instead of initializePowerUp/t directly if that's what App uses
 }));
 
 describe('App Integration', () => {
-  it('renders search bar', () => {
+  it('renders member selector', () => {
     render(<App />);
-    expect(screen.getByPlaceholderText(/Search username/i)).toBeInTheDocument();
+    expect(screen.getByText('Select Member')).toBeInTheDocument();
   });
 });

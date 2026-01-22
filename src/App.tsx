@@ -1,16 +1,17 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import SearchBar from './components/SearchBar';
+import { MemberSelector } from './components/MemberSelector';
 import ProjectGroup from './components/ProjectGroup';
 import { fetchAllCardsWithChecklists, updateChecklistItemState, type TrelloCard } from './services/data-fetching';
 import { filterAndGroupItems, type GroupedItems, type FlatChecklistItem } from './services/logic';
 import { getTrello } from './services/trello';
-import { MOCK_CARDS } from './services/mock-data';
+import { MOCK_CARDS, MOCK_MEMBERS } from './services/mock-data';
 
 function App() {
   const [cards, setCards] = useState<TrelloCard[]>([]);
   const [groupedItems, setGroupedItems] = useState<GroupedItems[]>([]);
   const [loading, setLoading] = useState(true);
+  const [selectedMember, setSelectedMember] = useState<TrelloMember | null>(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -46,12 +47,9 @@ function App() {
     loadData();
   }, []);
 
-  const handleSearch = (username: string) => {
-    if (!username || username.length < 2) {
-      setGroupedItems([]);
-      return;
-    }
-    const filtered = filterAndGroupItems(cards, username);
+  const handleSelectMember = (member: TrelloMember) => {
+    setSelectedMember(member);
+    const filtered = filterAndGroupItems(cards, member.username);
     setGroupedItems(filtered);
   };
 
@@ -92,7 +90,11 @@ function App() {
     <div className="app-container">
       <header className="app-header">
         <h1>Checklist Viewer</h1>
-        <SearchBar onSearch={handleSearch} />
+        <MemberSelector 
+          members={MOCK_MEMBERS}
+          onSelect={handleSelectMember}
+          selectedMember={selectedMember}
+        />
       </header>
 
       <main className="app-content">
@@ -108,7 +110,7 @@ function App() {
           ))
         ) : (
           <div className="status-message">
-            {cards.length > 0 ? "Enter a username to filter items." : "No checklists found on this board."}
+            {selectedMember ? "No checklists found for this member." : "Select a member to filter items."}
           </div>
         )}
       </main>

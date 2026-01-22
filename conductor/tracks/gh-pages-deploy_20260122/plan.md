@@ -11,7 +11,7 @@
     - [ ] 定義建置與部署至 `gh-pages` 分支的步驟
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Deployment Configuration' (Protocol in workflow.md) 7d01b95
 
-## Phase 2: Deployment & Documentation
+## Phase 2: Deployment & Documentation [checkpoint: 748d6d7]
 此階段完成實際部署並產出整合說明文件。
 
 - [x] Task: Execute initial deployment and verify URL 566a1c8
@@ -20,4 +20,4 @@
 - [x] Task: Create Trello Integration Guide (DEPLOY.md) df9f0f4
     - [ ] 撰寫如何獲取 GitHub Pages URL 的說明
     - [ ] 撰寫如何在 Trello 開發者後台更新 Connector URL 與開啟 Board Buttons 權限的指引
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Deployment & Documentation' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Deployment & Documentation' (Protocol in workflow.md) 748d6d7

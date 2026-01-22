@@ -22,21 +22,25 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
     // Get project name from the first label or "No Project"
     const projectName = card.labels && card.labels.length > 0 ? card.labels[0].name : 'No Project';
 
-    card.checklists.forEach((checklist) => {
-      checklist.checkItems.forEach((item) => {
-        if (item.name.toLowerCase().includes(searchStr)) {
-          flatItems.push({
-            cardId: card.id,
-            cardName: card.name,
-            checklistId: checklist.id,
-            itemId: item.id,
-            name: item.name,
-            state: item.state,
-            projectName, // temporary field for grouping
-          } as any);
+    if (card.checklists) {
+      card.checklists.forEach((checklist) => {
+        if (checklist.checkItems) {
+          checklist.checkItems.forEach((item) => {
+            if (item.name.toLowerCase().includes(searchStr)) {
+              flatItems.push({
+                cardId: card.id,
+                cardName: card.name,
+                checklistId: checklist.id,
+                itemId: item.id,
+                name: item.name,
+                state: item.state,
+                projectName, // temporary field for grouping
+              } as any);
+            }
+          });
         }
       });
-    });
+    }
   });
 
   // Group by projectName

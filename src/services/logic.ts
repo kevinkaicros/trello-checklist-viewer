@@ -20,11 +20,14 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
     // Get project name from the first label or "No Project"
     const projectName = card.labels && card.labels.length > 0 ? card.labels[0].name : 'No Project';
 
+    const isCardMember = card.members && card.members.some(m => m.username === username);
+
     if (card.checklists) {
       card.checklists.forEach((checklist) => {
         if (checklist.checkItems) {
           checklist.checkItems.forEach((item) => {
-            if (item.name.toLowerCase().includes(searchStr)) {
+            const matchesUsername = item.name.toLowerCase().includes(searchStr);
+            if (matchesUsername || isCardMember) {
               flatItems.push({
                 cardId: card.id,
                 cardName: card.name,

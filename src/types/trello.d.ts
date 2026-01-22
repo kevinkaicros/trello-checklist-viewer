@@ -32,4 +32,5 @@ interface TrelloCard {
   name: string;
   labels: { name: string }[];
   checklists: TrelloChecklist[];
+  members: TrelloMember[];
 }

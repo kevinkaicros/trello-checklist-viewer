@@ -31,13 +31,13 @@ describe('Data Fetching Service', () => {
 
     const result = await fetchAllCardsWithChecklists(mockT as any);
     
-    expect(mockT.cards).toHaveBeenCalledWith('id', 'name', 'checklists', 'labels');
+    expect(mockT.cards).toHaveBeenCalledWith('id', 'name', 'checklists', 'labels', 'members');
     expect(result).toEqual(mockCards);
   });
 
   it('fetchBoardMembers retrieves members from board', async () => {
     const mockMembers = [{ id: 'm1', fullName: 'Member 1', username: 'm1', avatar: 'url', initials: 'M1' }];
-    mockT.board.mockResolvedValue(mockMembers);
+    mockT.board.mockResolvedValue({ members: mockMembers });
     
     const result = await fetchBoardMembers(mockT as any);
     expect(mockT.board).toHaveBeenCalledWith('members');

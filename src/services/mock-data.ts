@@ -10,6 +10,7 @@ export const MOCK_CARDS: TrelloCard[] = [
     id: 'card-1',
     name: '完成專案報告',
     labels: [{ name: 'SGS 專案' }],
+    members: [{ id: '1', fullName: 'Kai Yu Fan', username: 'kai' }],
     checklists: [
       {
         id: 'cl-1',
@@ -25,6 +26,7 @@ export const MOCK_CARDS: TrelloCard[] = [
     id: 'card-2',
     name: '網站效能優化',
     labels: [{ name: '技術研發' }],
+    members: [{ id: '1', fullName: 'Kai Yu Fan', username: 'kai' }],
     checklists: [
       {
         id: 'cl-2',
@@ -40,6 +42,7 @@ export const MOCK_CARDS: TrelloCard[] = [
     id: 'card-3',
     name: '市場調研',
     labels: [],
+    members: [],
     checklists: [
       {
         id: 'cl-3',

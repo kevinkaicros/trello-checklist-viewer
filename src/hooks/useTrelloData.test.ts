@@ -41,7 +41,7 @@ describe('useTrelloData hooks', () => {
     import.meta.env.DEV = false;
 
     try {
-      const mockCards = [{ id: 'c1', name: 'Card 1', checklists: [], labels: [] }];
+      const mockCards = [{ id: 'c1', name: 'Card 1', checklists: [], labels: [], members: [] }];
       vi.mocked(trelloService.getTrello).mockReturnValue({});
       vi.mocked(dataFetching.fetchAllCardsWithChecklists).mockResolvedValue(mockCards);
 

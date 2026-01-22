@@ -7,6 +7,7 @@ describe('Logic Service', () => {
       id: 'c1',
       name: 'Card 1',
       labels: [{ name: 'Project B' }],
+      members: [],
       checklists: [
         {
           id: 'cl1',
@@ -22,6 +23,7 @@ describe('Logic Service', () => {
       id: 'c2',
       name: 'Card 2',
       labels: [{ name: 'Project A' }],
+      members: [],
       checklists: [
         {
           id: 'cl2',
@@ -36,6 +38,7 @@ describe('Logic Service', () => {
         id: 'c3',
         name: 'Card 3',
         labels: [], // No label
+        members: [],
         checklists: [
           {
             id: 'cl3',

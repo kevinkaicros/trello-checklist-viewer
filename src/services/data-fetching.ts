@@ -16,8 +16,8 @@ export const fetchBoardMembers = async (t: any): Promise<TrelloMember[]> => {
 };
 
 export const fetchAllCardsWithChecklists = async (t: any): Promise<TrelloCard[]> => {
-  // Request cards with checklists and labels
-  return await t.cards('id', 'name', 'checklists', 'labels');
+  // Request cards with checklists, labels, and members
+  return await t.cards('id', 'name', 'checklists', 'labels', 'members');
 };
 
 export const updateChecklistItemState = async (

@@ -38,21 +38,16 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
     // Get project name from the first label or "No Project"
     const projectName = card.labels && card.labels.length > 0 ? card.labels[0].name : 'No Project';
 
-    const isCardMember = card.members && card.members.some(m => m.username.toLowerCase() === searchStr);
+    // const isCardMember = card.members && card.members.some(m => m.username.toLowerCase() === searchStr);
     
-    // Debug log for card membership
-    // if (isCardMember) console.log(`[Filter] User is member of card: ${card.name}`);
-
     if (card.checklists) {
       card.checklists.forEach((checklist) => {
         if (checklist.checkItems) {
           checklist.checkItems.forEach((item) => {
-            // Check for direct username match or @username match
-            // Trello usernames in mentions typically include @
-            const matchesUsername = item.name.toLowerCase().includes(searchStr) || 
-                                    item.name.toLowerCase().includes(`@${searchStr}`);
+            // Check for direct username match or @username match in item name
+            const matchesUsername = item.name.toLowerCase().includes(searchStr);
             
-            if (matchesUsername || isCardMember) {
+            if (matchesUsername) {
               flatItems.push({
                 cardId: card.id,
                 cardName: card.name,

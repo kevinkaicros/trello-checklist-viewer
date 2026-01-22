@@ -1,0 +1,72 @@
+.member-selector {
+  position: relative;
+  display: inline-block;
+}
+
+.member-selector button {
+  background-color: #091e420f;
+  border: none;
+  border-radius: 3px;
+  color: #172b4d;
+  cursor: pointer;
+  padding: 6px 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.member-selector button:hover {
+  background-color: #091e4224;
+}
+
+.member-selector .dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  background: #ffffff;
+  border-radius: 3px;
+  box-shadow: 0 8px 16px -4px #091e4240, 0 0 0 1px #091e4214;
+  width: 300px;
+  margin-top: 4px;
+  padding: 8px 0;
+}
+
+.member-selector input {
+  width: calc(100% - 16px);
+  margin: 0 8px 8px;
+  padding: 8px 12px;
+  border: 2px solid #dfe1e6;
+  border-radius: 3px;
+  background-color: #fafbfc;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.member-selector input:focus {
+  background-color: #fff;
+  border-color: #0079bf;
+  outline: none;
+}
+
+.member-selector ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.member-selector li {
+  padding: 8px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  color: #172b4d;
+  font-size: 14px;
+}
+
+.member-selector li:hover {
+  background-color: #091e420f;
+  color: #091e42;
+}

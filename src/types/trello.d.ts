@@ -1,6 +1,14 @@
 interface TrelloPowerUp {
-  initialize: (capabilities: Record<string, any>) => void;
-  iframe: (options?: any) => any;
+  initialize: (capabilities: Record<string, (t: TrelloInstance) => unknown>) => void;
+  iframe: (options?: Record<string, unknown>) => TrelloInstance;
+}
+
+interface TrelloInstance {
+  board: (field: string) => Promise<Record<string, unknown>>; // Result structure varies by field
+  cards: (field: string) => Promise<TrelloCard[]>;
+  modal: (options: Record<string, unknown>) => Promise<void>;
+  get: (scope: string, visibility: string, key: string) => Promise<unknown>;
+  set: (scope: string, visibility: string, key: string, value: unknown) => Promise<void>;
 }
 
 interface Window {

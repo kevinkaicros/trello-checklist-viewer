@@ -29,9 +29,9 @@ describe('Data Fetching Service', () => {
     ];
     mockT.cards.mockResolvedValue(mockCards);
 
-    const result = await fetchAllCardsWithChecklists(mockT as any);
+    const result = await fetchAllCardsWithChecklists(mockT as unknown as TrelloInstance);
     
-    expect(mockT.cards).toHaveBeenCalledWith('id', 'name', 'checklists', 'labels', 'members');
+    expect(mockT.cards).toHaveBeenCalledWith('all');
     expect(result).toEqual(mockCards);
   });
 
@@ -39,7 +39,7 @@ describe('Data Fetching Service', () => {
     const mockMembers = [{ id: 'm1', fullName: 'Member 1', username: 'm1', avatar: 'url', initials: 'M1' }];
     mockT.board.mockResolvedValue({ members: mockMembers });
     
-    const result = await fetchBoardMembers(mockT as any);
+    const result = await fetchBoardMembers(mockT as unknown as TrelloInstance);
     expect(mockT.board).toHaveBeenCalledWith('members');
     expect(result).toHaveLength(1);
     expect(result[0].fullName).toBe('Member 1');
@@ -47,6 +47,6 @@ describe('Data Fetching Service', () => {
 
   it('updateChecklistItemState log update (placeholder)', async () => {
     // Current implementation only logs, but we verify it doesn't crash
-    await updateChecklistItemState(mockT as any, 'card1', 'cl1', 'item1', 'complete');
+    await updateChecklistItemState(mockT as unknown as TrelloInstance, 'card1', 'cl1', 'item1', 'complete');
   });
 });

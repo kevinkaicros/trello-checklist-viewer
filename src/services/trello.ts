@@ -18,7 +18,7 @@ export const initializePowerUp = () => {
           light: iconLight,
         },
         text: '清單 Viewer',
-        callback: function (t: any) {
+        callback: function (t: TrelloInstance) {
           console.log('Trello Power-Up: Button clicked');
           // Append ?modal=true to differentiate context
           const url = new URL(window.location.href);
@@ -36,9 +36,9 @@ export const initializePowerUp = () => {
   console.log('Trello Power-Up: Initialization called.');
 };
 
-let tInstance: any = null;
+let tInstance: TrelloInstance | null = null;
 
-export const getTrello = () => {
+export const getTrello = (): TrelloInstance | null => {
   if (tInstance) return tInstance;
   if (window.TrelloPowerUp) {
     // Only call iframe() if we haven't successfully initialized as a connector?

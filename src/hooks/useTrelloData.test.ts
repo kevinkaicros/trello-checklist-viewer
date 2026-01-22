@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { renderHook, waitFor } from '@testing-library/react';
 import { useBoardMembers, useMemberChecklists } from './useTrelloData';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -21,7 +22,13 @@ describe('useTrelloData hooks', () => {
     
     try {
       const mockMembers = [{ id: '1', fullName: 'Test', username: 'test' }];
-      vi.mocked(trelloService.getTrello).mockReturnValue({});
+      vi.mocked(trelloService.getTrello).mockReturnValue({
+        board: vi.fn(),
+        cards: vi.fn(),
+        modal: vi.fn(),
+        get: vi.fn(),
+        set: vi.fn(),
+      } as unknown as TrelloInstance);
       vi.mocked(dataFetching.fetchBoardMembers).mockResolvedValue(mockMembers);
 
       const { result } = renderHook(() => useBoardMembers());
@@ -42,7 +49,13 @@ describe('useTrelloData hooks', () => {
 
     try {
       const mockCards = [{ id: 'c1', name: 'Card 1', checklists: [], labels: [], members: [] }];
-      vi.mocked(trelloService.getTrello).mockReturnValue({});
+      vi.mocked(trelloService.getTrello).mockReturnValue({
+        board: vi.fn(),
+        cards: vi.fn(),
+        modal: vi.fn(),
+        get: vi.fn(),
+        set: vi.fn(),
+      } as unknown as TrelloInstance);
       vi.mocked(dataFetching.fetchAllCardsWithChecklists).mockResolvedValue(mockCards);
 
       const { result, rerender } = renderHook(({ username }) => useMemberChecklists(username), {
@@ -55,7 +68,8 @@ describe('useTrelloData hooks', () => {
 
       await waitFor(() => expect(result.current.loading).toBe(false));
       expect(result.current.cards).toEqual(mockCards);
-    } finally {
+    }
+    finally {
       // @ts-ignore
       import.meta.env.DEV = originalDev;
     }

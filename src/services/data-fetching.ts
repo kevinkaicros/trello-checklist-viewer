@@ -1,8 +1,8 @@
-export const fetchBoardMembers = async (t: any): Promise<TrelloMember[]> => {
+export const fetchBoardMembers = async (t: TrelloInstance): Promise<TrelloMember[]> => {
   try {
-    const board = await t.board('members');
+    const board = await t.board('members') as Record<string, unknown> & { members?: (TrelloMember & { avatar?: string })[] };
     const members = board.members || [];
-    return members.map((m: any) => ({
+    return members.map((m) => ({
       id: m.id,
       fullName: m.fullName,
       username: m.username,
@@ -15,13 +15,13 @@ export const fetchBoardMembers = async (t: any): Promise<TrelloMember[]> => {
   }
 };
 
-export const fetchAllCardsWithChecklists = async (t: any): Promise<TrelloCard[]> => {
-  // Request cards with checklists, labels, and members
-  return await t.cards('id', 'name', 'checklists', 'labels', 'members');
+export const fetchAllCardsWithChecklists = async (t: TrelloInstance): Promise<TrelloCard[]> => {
+  // Use 'all' to ensure we get checklists with their checkItems
+  return await t.cards('all');
 };
 
 export const updateChecklistItemState = async (
-  _t: any,
+  _t: TrelloInstance,
   _cardId: string,
   _checklistId: string,
   checkItemId: string,

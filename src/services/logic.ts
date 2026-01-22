@@ -42,8 +42,11 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
     
     if (card.checklists) {
       card.checklists.forEach((checklist) => {
-        if (checklist.checkItems) {
-          checklist.checkItems.forEach((item) => {
+        // Trello API can sometimes use 'checkItems' or just 'items'
+        const items = checklist.checkItems || (checklist as unknown as { items: TrelloCheckItem[] }).items;
+        
+        if (items && Array.isArray(items)) {
+          items.forEach((item: TrelloCheckItem) => {
             // Check for direct username match or @username match in item name
             const matchesUsername = item.name.toLowerCase().includes(searchStr);
             
@@ -56,7 +59,7 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
                 name: item.name,
                 state: item.state,
                 projectName, // temporary field for grouping
-              } as any);
+              } as FlatChecklistItem & { projectName: string });
             }
           });
         }
@@ -68,7 +71,7 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
 
   // Group by projectName
   const groups: Record<string, FlatChecklistItem[]> = {};
-  flatItems.forEach((item: any) => {
+  (flatItems as (FlatChecklistItem & { projectName: string })[]).forEach((item) => {
     const pName = item.projectName;
     if (!groups[pName]) {
       groups[pName] = [];

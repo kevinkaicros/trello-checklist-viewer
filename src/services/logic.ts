@@ -16,17 +16,24 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
   const flatItems: FlatChecklistItem[] = [];
   const searchStr = username.toLowerCase();
 
+  console.log(`[Filter] Filtering for user: ${username} (search: ${searchStr})`);
+  console.log(`[Filter] Total cards to process: ${cards.length}`);
+
   cards.forEach((card) => {
     // Get project name from the first label or "No Project"
     const projectName = card.labels && card.labels.length > 0 ? card.labels[0].name : 'No Project';
 
-    const isCardMember = card.members && card.members.some(m => m.username === username);
+    const isCardMember = card.members && card.members.some(m => m.username.toLowerCase() === searchStr);
+    
+    // Debug log for card membership
+    // if (isCardMember) console.log(`[Filter] User is member of card: ${card.name}`);
 
     if (card.checklists) {
       card.checklists.forEach((checklist) => {
         if (checklist.checkItems) {
           checklist.checkItems.forEach((item) => {
             const matchesUsername = item.name.toLowerCase().includes(searchStr);
+            
             if (matchesUsername || isCardMember) {
               flatItems.push({
                 cardId: card.id,
@@ -43,6 +50,8 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
       });
     }
   });
+
+  console.log(`[Filter] Found ${flatItems.length} matching items.`);
 
   // Group by projectName
   const groups: Record<string, FlatChecklistItem[]> = {};

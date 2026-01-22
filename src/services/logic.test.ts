@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { filterAndGroupItems } from './logic';
-import { TrelloCard } from './data-fetching';
+import type { TrelloCard } from './data-fetching';
 
 describe('Logic Service', () => {
   const mockCards: TrelloCard[] = [

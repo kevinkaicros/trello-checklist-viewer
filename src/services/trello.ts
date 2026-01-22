@@ -1,7 +1,7 @@
 export const initializePowerUp = () => {
   if (window.TrelloPowerUp) {
     window.TrelloPowerUp.initialize({
-      'board-buttons': function (t: any) {
+      'board-buttons': function (_t: any) {
         return [{
           icon: {
             dark: '/vite.svg',

@@ -14,7 +14,7 @@
 ## Phase 2: Deployment & Documentation
 此階段完成實際部署並產出整合說明文件。
 
-- [ ] Task: Execute initial deployment and verify URL
+- [x] Task: Execute initial deployment and verify URL 566a1c8
     - [ ] 推送程式碼至 GitHub 觸發 Actions
     - [ ] 驗證 GitHub Pages 是否成功顯示 Vite 預設頁面或 App 內容
 - [x] Task: Create Trello Integration Guide (DEPLOY.md) df9f0f4

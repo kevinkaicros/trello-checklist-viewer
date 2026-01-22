@@ -16,12 +16,31 @@ export const fetchBoardMembers = async (t: TrelloInstance): Promise<TrelloMember
 };
 
 export const fetchAllCardsWithChecklists = async (t: TrelloInstance): Promise<TrelloCard[]> => {
-  // In Trello Power-Up client library, t.cards('all') usually returns checklists, 
-  // but checkItems might need to be explicitly requested or fetched per card.
-  // However, t.cards('id', 'name', 'checklists') is another pattern.
-  // According to some Power-Up docs, 'all' should include them, but let's try to be explicit
-  // if 'all' is failing to provide checkItems.
-  return await t.cards('id', 'name', 'checklists', 'labels', 'members');
+  // Step 1: Fetch all visible cards with their basic checklist metadata
+  const cards = await t.cards('id', 'name', 'checklists', 'labels', 'members');
+  
+  // Step 2: For cards that have checklists, fetch the full checklist data (including checkItems)
+  // t.cards() often omits checkItems for performance, so we fetch them per-card.
+  const cardsWithFullChecklists = await Promise.all(
+    cards.map(async (card) => {
+      if (card.checklists && card.checklists.length > 0) {
+        try {
+          // Fetching specific card fields, including 'checklists' which contains checkItems
+          const fullCardData = await t.card(card.id, 'checklists');
+          return {
+            ...card,
+            checklists: fullCardData.checklists || [],
+          };
+        } catch (err) {
+          console.warn(`Failed to fetch full checklists for card ${card.id}`, err);
+          return card;
+        }
+      }
+      return card;
+    })
+  );
+
+  return cardsWithFullChecklists;
 };
 
 export const updateChecklistItemState = async (

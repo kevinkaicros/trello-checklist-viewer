@@ -10,8 +10,8 @@ import { useBoardMembers, useMemberChecklists } from './hooks/useTrelloData';
 function App() {
   const [selectedMember, setSelectedMember] = useState<TrelloMember | null>(null);
   
-  const { members } = useBoardMembers();
-  const { cards, loading: cardsLoading, setCards } = useMemberChecklists(selectedMember?.username || null);
+  const { members, error: membersError } = useBoardMembers();
+  const { cards, loading: cardsLoading, error: cardsError, setCards } = useMemberChecklists(selectedMember?.username || null);
 
   const groupedItems = selectedMember 
     ? filterAndGroupItems(cards, selectedMember.username) 
@@ -54,9 +54,12 @@ function App() {
       await updateChecklistItemState(t, item.cardId, item.checklistId, item.itemId, newState);
     } catch (err) {
       console.error('Failed to update item state', err);
-      // Optional: Rollback state here
     }
   };
+
+  if (membersError) {
+    return <div className="app-container status-message">Error loading members: {membersError.message}</div>;
+  }
 
   return (
     <div className="app-container">
@@ -72,6 +75,8 @@ function App() {
       <main className="app-content">
         {cardsLoading ? (
           <div className="status-message">Loading Trello data...</div>
+        ) : cardsError ? (
+          <div className="status-message">Error loading cards: {cardsError.message}</div>
         ) : groupedItems.length > 0 ? (
           groupedItems.map((group) => (
             <ProjectGroup

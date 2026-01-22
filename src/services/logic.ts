@@ -19,6 +19,21 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
   console.log(`[Filter] Filtering for user: ${username} (search: ${searchStr})`);
   console.log(`[Filter] Total cards to process: ${cards.length}`);
 
+  if (cards.length > 0) {
+    const firstCard = cards[0];
+    console.log('[Filter] Debug First Card:', {
+      id: firstCard.id,
+      name: firstCard.name,
+      members: firstCard.members,
+      checklistsCount: firstCard.checklists?.length,
+      firstChecklist: firstCard.checklists?.[0]
+    });
+    if (firstCard.members && firstCard.members.length > 0) {
+       console.log('[Filter] First Card Member Username:', firstCard.members[0].username);
+       console.log('[Filter] Comparing against searchStr:', searchStr);
+    }
+  }
+
   cards.forEach((card) => {
     // Get project name from the first label or "No Project"
     const projectName = card.labels && card.labels.length > 0 ? card.labels[0].name : 'No Project';
@@ -32,7 +47,10 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
       card.checklists.forEach((checklist) => {
         if (checklist.checkItems) {
           checklist.checkItems.forEach((item) => {
-            const matchesUsername = item.name.toLowerCase().includes(searchStr);
+            // Check for direct username match or @username match
+            // Trello usernames in mentions typically include @
+            const matchesUsername = item.name.toLowerCase().includes(searchStr) || 
+                                    item.name.toLowerCase().includes(`@${searchStr}`);
             
             if (matchesUsername || isCardMember) {
               flatItems.push({

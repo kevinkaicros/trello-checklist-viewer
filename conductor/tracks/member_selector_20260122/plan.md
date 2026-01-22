@@ -29,11 +29,11 @@
 ## Phase 3: End-to-End Integration & Polish
 **Goal:** Connect the UI and API, ensuring the feature works as expected in the real environment.
 
-- [ ] Task: Connect UI to Real API
-    - [ ] Sub-task: Bind the `MemberSelector` to the real Board Members API.
-    - [ ] Sub-task: Bind the Checklist Viewer to the real `useMemberChecklists` data.
-    - [ ] Sub-task: Remove or deprecate `src/services/mock-data.ts`.
-- [ ] Task: Final Polish
-    - [ ] Sub-task: Ensure "Loading" indicators are visible and styled correctly during API fetches.
-    - [ ] Sub-task: Verify error handling (e.g., if API fails).
+- [x] Task: Connect UI to Real API c88f1bc
+    - [x] Sub-task: Bind the `MemberSelector` to the real Board Members API. c88f1bc
+    - [x] Sub-task: Bind the Checklist Viewer to the real `useMemberChecklists` data. c88f1bc
+    - [x] Sub-task: Remove or deprecate `src/services/mock-data.ts`. c88f1bc
+- [x] Task: Final Polish bb74e11
+    - [x] Sub-task: Ensure "Loading" indicators are visible and styled correctly during API fetches. bb74e11
+    - [x] Sub-task: Verify error handling (e.g., if API fails). bb74e11
 - [ ] Task: Conductor - User Manual Verification 'Phase 3: End-to-End Integration & Polish' (Protocol in workflow.md)

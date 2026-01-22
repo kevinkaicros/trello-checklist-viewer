@@ -6,7 +6,7 @@
 - [x] Task: Configure Vite for GitHub Pages base path 804b497
     - [ ] 讀取 `package.json` 確認 repository 名稱
     - [ ] 修改 `vite.config.ts` 中的 `base` 屬性為 `/<repo-name>/`
-- [ ] Task: Create GitHub Actions deployment workflow
+- [x] Task: Create GitHub Actions deployment workflow 0b7b221
     - [ ] 建立 `.github/workflows/deploy.yml`
     - [ ] 定義建置與部署至 `gh-pages` 分支的步驟
 - [ ] Task: Conductor - User Manual Verification 'Phase 1: Deployment Configuration' (Protocol in workflow.md)

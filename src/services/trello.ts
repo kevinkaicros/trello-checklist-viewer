@@ -11,8 +11,8 @@ export const initializePowerUp = () => {
       console.log('Trello Power-Up: board-buttons requested');
       return [{
         icon: {
-          dark: './vite.svg',
-          light: './vite.svg',
+          dark: './viewer-icon.svg',
+          light: './viewer-icon.svg',
         },
         text: 'Checklist Viewer',
         callback: function (t: any) {

@@ -1,18 +1,3 @@
-export interface TrelloCard {
-  id: string;
-  name: string;
-  labels: { name: string }[];
-  checklists: {
-    id: string;
-    name: string;
-    checkItems: {
-      id: string;
-      name: string;
-      state: string;
-    }[];
-  }[];
-}
-
 export const fetchBoardMembers = async (t: any): Promise<TrelloMember[]> => {
   try {
     const members = await t.board('members');

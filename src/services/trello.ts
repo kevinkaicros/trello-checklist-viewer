@@ -4,8 +4,8 @@ export const initializePowerUp = () => {
       'board-buttons': function (_t: any) {
         return [{
           icon: {
-            dark: '/vite.svg',
-            light: '/vite.svg',
+            dark: './vite.svg',
+            light: './vite.svg',
           },
           text: 'Checklist Viewer',
           callback: function (t: any) {

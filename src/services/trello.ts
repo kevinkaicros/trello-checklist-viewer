@@ -17,9 +17,13 @@ export const initializePowerUp = () => {
         text: 'Checklist Viewer',
         callback: function (t: any) {
           console.log('Trello Power-Up: Button clicked');
+          // Append ?modal=true to differentiate context
+          const url = new URL(window.location.href);
+          url.searchParams.set('modal', 'true');
+          
           return t.modal({
             title: 'Checklist Viewer',
-            url: window.location.href,
+            url: url.toString(),
             fullscreen: true,
           });
         },

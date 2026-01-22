@@ -13,18 +13,18 @@
     - [x] Sub-task: Wire up state management to handle the selected member object. 63a5ae7
 - [x] Task: Conductor - User Manual Verification 'Phase 1: Member Selector UI Implementation' (Protocol in workflow.md) 91e2944
 
-## Phase 2: Trello API Client & Data Fetching
+## Phase 2: Trello API Client & Data Fetching [checkpoint: 57d7404]
 **Goal:** Implement the logic to fetch real data from Trello, replacing mock data.
 
 - [x] Task: Update Trello Service (`src/services/trello.ts`) e1ccaad
     - [x] Sub-task: Research and implement the specific Trello API call to fetch Board Members. e1ccaad
     - [x] Sub-task: Research and implement the Trello API call to fetch Cards and Checklists (filtering logic may be needed here or client-side). e1ccaad
     - [x] Sub-task: Update TypeScript interfaces in `src/types/trello.d.ts` to match real API responses. acd65d5
-- [~] Task: Implement Data Fetching Logic (Lazy Loading)
+- [x] Task: Implement Data Fetching Logic (Lazy Loading) 91435ad
     - [x] Sub-task: Create a new hook or service function `useMemberChecklists(memberId)` that triggers the API call only when a member is selected. 91435ad
     - [x] Sub-task: Handle Loading and Error states in the UI. 91435ad
     - [x] Sub-task: Write integration tests for the data fetching logic (mocking the Trello API client). 91435ad
-- [ ] Task: Conductor - User Manual Verification 'Phase 2: Trello API Client & Data Fetching' (Protocol in workflow.md)
+- [x] Task: Conductor - User Manual Verification 'Phase 2: Trello API Client & Data Fetching' (Protocol in workflow.md) 57d7404
 
 ## Phase 3: End-to-End Integration & Polish
 **Goal:** Connect the UI and API, ensuring the feature works as expected in the real environment.

@@ -5,10 +5,11 @@ import App from './App.tsx'
 import { initializePowerUp } from './services/trello'
 
 const isModal = new URLSearchParams(window.location.search).get('modal') === 'true';
+const isDev = import.meta.env.DEV;
 
-if (isModal) {
-  // We are inside the modal -> Render the App (which calls iframe())
-  console.log('Trello Power-Up: Modal detected. Rendering App...');
+if (isModal || isDev) {
+  // We are inside the modal or in DEV mode -> Render the App
+  console.log('Trello Power-Up: Modal detected (or DEV). Rendering App...');
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <App />

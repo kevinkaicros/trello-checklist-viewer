@@ -16,14 +16,14 @@
 ## Phase 2: Trello API Client & Data Fetching
 **Goal:** Implement the logic to fetch real data from Trello, replacing mock data.
 
-- [ ] Task: Update Trello Service (`src/services/trello.ts`)
-    - [ ] Sub-task: Research and implement the specific Trello API call to fetch Board Members.
-    - [ ] Sub-task: Research and implement the Trello API call to fetch Cards and Checklists (filtering logic may be needed here or client-side).
-    - [ ] Sub-task: Update TypeScript interfaces in `src/types/trello.d.ts` to match real API responses.
-- [ ] Task: Implement Data Fetching Logic (Lazy Loading)
-    - [ ] Sub-task: Create a new hook or service function `useMemberChecklists(memberId)` that triggers the API call only when a member is selected.
-    - [ ] Sub-task: Handle Loading and Error states in the UI.
-    - [ ] Sub-task: Write integration tests for the data fetching logic (mocking the Trello API client).
+- [x] Task: Update Trello Service (`src/services/trello.ts`) e1ccaad
+    - [x] Sub-task: Research and implement the specific Trello API call to fetch Board Members. e1ccaad
+    - [x] Sub-task: Research and implement the Trello API call to fetch Cards and Checklists (filtering logic may be needed here or client-side). e1ccaad
+    - [x] Sub-task: Update TypeScript interfaces in `src/types/trello.d.ts` to match real API responses. acd65d5
+- [~] Task: Implement Data Fetching Logic (Lazy Loading)
+    - [x] Sub-task: Create a new hook or service function `useMemberChecklists(memberId)` that triggers the API call only when a member is selected. 91435ad
+    - [x] Sub-task: Handle Loading and Error states in the UI. 91435ad
+    - [x] Sub-task: Write integration tests for the data fetching logic (mocking the Trello API client). 91435ad
 - [ ] Task: Conductor - User Manual Verification 'Phase 2: Trello API Client & Data Fetching' (Protocol in workflow.md)
 
 ## Phase 3: End-to-End Integration & Polish

@@ -1,0 +1,8 @@
+{
+  "track_id": "member_selector_20260122",
+  "type": "feature",
+  "status": "new",
+  "created_at": "2026-01-22T00:00:00Z",
+  "updated_at": "2026-01-22T00:00:00Z",
+  "description": "目前的搜尋功能是用手動輸入的，改為用挑選成員，以及實作搜尋trello內的checklist,目前找不到checklist,之前是用mockdata，先進行可行性評估和分析"
+}

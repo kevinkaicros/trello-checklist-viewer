@@ -1,6 +1,7 @@
 export const fetchBoardMembers = async (t: any): Promise<TrelloMember[]> => {
   try {
-    const members = await t.board('members');
+    const board = await t.board('members');
+    const members = board.members || [];
     return members.map((m: any) => ({
       id: m.id,
       fullName: m.fullName,

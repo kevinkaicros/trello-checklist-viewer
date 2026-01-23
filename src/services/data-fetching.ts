@@ -23,6 +23,7 @@ export const fetchAllCardsWithChecklists = async (t: TrelloInstance): Promise<Tr
       // Use REST API to fetch cards with full checklists (including checkItems) in one request
       return await restApi.get(`boards/${board.id}/cards`, {
         checklists: 'all',
+        checkItem_fields: 'all',
         fields: 'name,labels,members',
         member_fields: 'fullName,username,avatar',
         labels: 'all'

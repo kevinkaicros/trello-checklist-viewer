@@ -1,5 +1,8 @@
 interface TrelloPowerUp {
-  initialize: (capabilities: Record<string, (t: TrelloInstance) => unknown>) => void;
+  initialize: (
+    capabilities: Record<string, (t: TrelloInstance) => unknown>,
+    options?: { appKey?: string; appName?: string }
+  ) => void;
   iframe: (options?: Record<string, unknown>) => TrelloInstance;
 }
 

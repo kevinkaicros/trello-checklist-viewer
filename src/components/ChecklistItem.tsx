@@ -16,6 +16,7 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ item, onToggle }) => {
       />
       <div className="item-details">
         <span className="item-name">{item.name}</span>
+        <span className="card-name">{item.cardName}</span>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ export const MemberSelector: React.FC<MemberSelectorProps> = ({ members, onSelec
   return (
     <div className="member-selector">
       <button onClick={() => setIsOpen(!isOpen)}>
-        {selectedMember ? `@${selectedMember.username}` : 'Select Member'}
+        {selectedMember ? selectedMember.fullName : 'Select Member'}
       </button>
       {isOpen && (
         <div className="dropdown">

@@ -64,7 +64,7 @@ describe('Data Fetching Service', () => {
       getRestApi: vi.fn().mockReturnValue(mockRestApi),
     };
 
-    global.fetch = vi.fn().mockResolvedValue({
+    globalThis.fetch = vi.fn().mockResolvedValue({
       ok: true,
       json: () => Promise.resolve({}),
     });
@@ -81,17 +81,17 @@ describe('Data Fetching Service', () => {
     expect(mockRestApi.isAuthorized).toHaveBeenCalled();
     expect(mockRestApi.getToken).toHaveBeenCalled();
     
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('https://api.trello.com/1/cards/card1/checklist/cl1/checkItem/item1'),
       expect.objectContaining({
         method: 'PUT',
       })
     );
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('state=complete'),
       expect.anything()
     );
-    expect(global.fetch).toHaveBeenCalledWith(
+    expect(globalThis.fetch).toHaveBeenCalledWith(
       expect.stringContaining('token=mockToken'),
       expect.anything()
     );

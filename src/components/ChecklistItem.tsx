@@ -8,7 +8,7 @@ interface ChecklistItemProps {
 
 const ChecklistItem: React.FC<ChecklistItemProps> = ({ item, onToggle }) => {
   return (
-    <div className="checklist-item">
+    <label className="checklist-item">
       <input
         type="checkbox"
         checked={item.state === 'complete'}
@@ -18,7 +18,7 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ item, onToggle }) => {
         <span className="item-name">{item.name}</span>
         <span className="card-name">{item.cardName}</span>
       </div>
-    </div>
+    </label>
   );
 };
 

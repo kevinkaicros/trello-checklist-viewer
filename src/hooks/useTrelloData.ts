@@ -53,7 +53,15 @@ export const useMemberChecklists = (memberUsername: string | null) => {
     const loadChecklists = async () => {
       setLoading(true);
       if (import.meta.env.DEV) {
-        setCards(MOCK_CARDS);
+        const filteredMock = MOCK_CARDS.map(card => ({
+          ...card,
+          checklists: (card.checklists || []).map(checklist => ({
+            ...checklist,
+            checkItems: (checklist.checkItems || []).filter(item => item.state !== 'complete')
+          })).filter(checklist => checklist.checkItems.length > 0)
+        })).filter(card => card.checklists.length > 0);
+
+        setCards(filteredMock);
         setLoading(false);
         return;
       }
@@ -66,7 +74,18 @@ export const useMemberChecklists = (memberUsername: string | null) => {
       }
       try {
         const data = await fetchAllCardsWithChecklists(t);
-        setCards(data);
+        
+        // Filter out completed items on initial load.
+        // Also remove checklists/cards that become empty after filtering.
+        const filteredData = data.map(card => ({
+          ...card,
+          checklists: (card.checklists || []).map(checklist => ({
+            ...checklist,
+            checkItems: (checklist.checkItems || []).filter(item => item.state !== 'complete')
+          })).filter(checklist => checklist.checkItems.length > 0)
+        })).filter(card => card.checklists.length > 0);
+
+        setCards(filteredData);
       } catch (err) {
         console.warn('Failed to fetch cards, using mock.', err);
         setCards(MOCK_CARDS);

@@ -7,18 +7,26 @@ interface ChecklistItemProps {
 }
 
 const ChecklistItem: React.FC<ChecklistItemProps> = ({ item, onToggle }) => {
+  const handleRowClick = () => {
+    onToggle(item);
+  };
+
+  const handleCheckboxClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <label className="checklist-item">
+    <div className="checklist-item" onClick={handleRowClick}>
       <input
         type="checkbox"
         checked={item.state === 'complete'}
         onChange={() => onToggle(item)}
+        onClick={handleCheckboxClick}
       />
       <div className="item-details">
         <span className="item-name">{item.name}</span>
-        <span className="card-name">{item.cardName}</span>
       </div>
-    </label>
+    </div>
   );
 };
 

@@ -32,13 +32,15 @@ export const fetchAllCardsWithChecklists = async (t: TrelloInstance): Promise<Tr
     if (isAuthorized) {
       const board = await t.board('id');
       // Use REST API to fetch cards with full checklists (including checkItems) in one request
-      return await restApi.get(`boards/${board.id}/cards`, {
-        checklists: 'all',
-        checkItem_fields: 'all',
-        fields: 'name,labels,members',
-        member_fields: 'fullName,username,avatar',
-        labels: 'all'
-      });
+      const token = await restApi.getToken();
+      const appKey = 'f23a4b4318d7a4f0c74816c3b595be78';
+      const response = await fetch(`https://api.trello.com/1/boards/${board.id}/cards?checklists=all&checkItem_fields=all&fields=name,labels,members&member_fields=fullName,username,avatar&labels=all&key=${appKey}&token=${token}`);
+      
+      if (!response.ok) {
+        throw new Error(`Trello API error: ${response.status} ${response.statusText}`);
+      }
+
+      return await response.json();
     }
   } catch (err) {
     console.warn('REST API not available or not authorized, falling back to t.cards()', err);

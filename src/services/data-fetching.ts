@@ -79,6 +79,8 @@ export const updateChecklistItemState = async (
 
       if (response.status === 401) {
         console.warn('Unauthorized (401) during update, attempting to re-authorize with write scope...');
+        // Force clear the old token to ensure a new one is issued with correct scopes
+        await restApi.clearToken();
         await restApi.authorize({ scope: 'read,write' });
         token = await restApi.getToken();
         response = await performRequest(token);

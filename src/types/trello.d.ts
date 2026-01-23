@@ -20,6 +20,7 @@ interface TrelloRestApi {
   isAuthorized: () => Promise<boolean>;
   authorize: (options?: Record<string, unknown>) => Promise<void>;
   getToken: () => Promise<string>;
+  clearToken: () => Promise<void>;
   get: (path: string, params?: Record<string, unknown>) => Promise<any>;
 }
 

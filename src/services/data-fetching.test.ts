@@ -102,6 +102,7 @@ describe('Data Fetching Service', () => {
       isAuthorized: vi.fn().mockResolvedValue(true),
       getToken: vi.fn().mockResolvedValueOnce('oldToken').mockResolvedValueOnce('newToken'),
       authorize: vi.fn().mockResolvedValue(undefined),
+      clearToken: vi.fn().mockResolvedValue(undefined),
     };
     const mockTWithRest = {
       ...mockT,
@@ -128,6 +129,7 @@ describe('Data Fetching Service', () => {
       'complete'
     );
 
+    expect(mockRestApi.clearToken).toHaveBeenCalled();
     expect(mockRestApi.authorize).toHaveBeenCalledWith({ scope: 'read,write' });
     expect(globalThis.fetch).toHaveBeenCalledTimes(2);
     expect(globalThis.fetch).toHaveBeenNthCalledWith(1, 

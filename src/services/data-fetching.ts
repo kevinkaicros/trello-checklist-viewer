@@ -51,18 +51,39 @@ export const fetchAllCardsWithChecklists = async (t: TrelloInstance): Promise<Tr
 };
 
 export const updateChecklistItemState = async (
-  _t: TrelloInstance,
-  _cardId: string,
-  _checklistId: string,
+  t: TrelloInstance,
+  cardId: string,
+  checklistId: string,
   checkItemId: string,
   state: 'complete' | 'incomplete'
 ): Promise<void> => {
-  // In Trello Power-Up, updating a core checklist item state 
-  // can be done via the REST API or sometimes via helper if available.
-  // Using the REST API is the most reliable way for core objects.
-  // However, t.set is often used for plugin-specific data.
-  // For now, we will use a placeholder or assume the Power-Up has permission.
-  // Note: Real implementation might need a fetch to Trello API endpoint.
-  console.log(`Updating ${checkItemId} to ${state}`);
-  // return await t.set(cardId, 'shared', `checkitem-${checkItemId}-state`, state);
+  try {
+    const restApi = t.getRestApi();
+    const isAuthorized = await restApi.isAuthorized();
+
+    if (isAuthorized) {
+      const token = await restApi.getToken();
+      const appKey = 'f23a4b4318d7a4f0c74816c3b595be78';
+      
+      const response = await fetch(
+        `https://api.trello.com/1/cards/${cardId}/checklist/${checklistId}/checkItem/${checkItemId}?key=${appKey}&token=${token}&state=${state}`,
+        {
+          method: 'PUT',
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`Failed to update check item state: ${response.status} ${response.statusText}`);
+      }
+      
+      console.log(`Successfully updated ${checkItemId} to ${state}`);
+    } else {
+      console.warn('User not authorized to update checklist item via REST API');
+      // Potential fallback: ask for auth or try t.set() if meaningful, 
+      // but t.set() is for plugin data, not core Trello data.
+    }
+  } catch (err) {
+    console.error('Error updating checklist item state', err);
+    throw err;
+  }
 };

@@ -6,13 +6,18 @@ describe('Data Fetching Service', () => {
     cards: vi.fn(),
     set: vi.fn(),
     board: vi.fn(),
+    getRestApi: vi.fn().mockReturnValue({
+      isAuthorized: vi.fn().mockResolvedValue(false), // Default to false to fallback to t.cards() for existing tests
+      getToken: vi.fn(),
+      authorize: vi.fn(),
+    }),
   };
 
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
-  it('fetchAllCardsWithChecklists retrieves all cards with specific fields', async () => {
+  it('fetchAllCardsWithChecklists retrieves all cards with specific fields (fallback)', async () => {
     const mockCards = [
       {
         id: 'card1',
@@ -28,10 +33,14 @@ describe('Data Fetching Service', () => {
       },
     ];
     mockT.cards.mockResolvedValue(mockCards);
+    
+    // Force authorization to fail to trigger fallback
+    const mockRestApi = mockT.getRestApi();
+    mockRestApi.authorize.mockRejectedValue(new Error('Auth failed'));
 
     const result = await fetchAllCardsWithChecklists(mockT as unknown as TrelloInstance);
     
-    expect(mockT.cards).toHaveBeenCalledWith('all');
+    expect(mockT.cards).toHaveBeenCalledWith('id', 'name', 'checklists', 'labels', 'members');
     expect(result).toEqual(mockCards);
   });
 
@@ -45,8 +54,46 @@ describe('Data Fetching Service', () => {
     expect(result[0].fullName).toBe('Member 1');
   });
 
-  it('updateChecklistItemState log update (placeholder)', async () => {
-    // Current implementation only logs, but we verify it doesn't crash
-    await updateChecklistItemState(mockT as unknown as TrelloInstance, 'card1', 'cl1', 'item1', 'complete');
+  it('updateChecklistItemState calls REST API with correct parameters', async () => {
+    const mockRestApi = {
+      isAuthorized: vi.fn().mockResolvedValue(true),
+      getToken: vi.fn().mockResolvedValue('mockToken'),
+    };
+    const mockTWithRest = {
+      ...mockT,
+      getRestApi: vi.fn().mockReturnValue(mockRestApi),
+    };
+
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({}),
+    });
+
+    await updateChecklistItemState(
+      mockTWithRest as unknown as TrelloInstance,
+      'card1',
+      'cl1',
+      'item1',
+      'complete'
+    );
+
+    expect(mockTWithRest.getRestApi).toHaveBeenCalled();
+    expect(mockRestApi.isAuthorized).toHaveBeenCalled();
+    expect(mockRestApi.getToken).toHaveBeenCalled();
+    
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.stringContaining('https://api.trello.com/1/cards/card1/checklist/cl1/checkItem/item1'),
+      expect.objectContaining({
+        method: 'PUT',
+      })
+    );
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.stringContaining('state=complete'),
+      expect.anything()
+    );
+    expect(global.fetch).toHaveBeenCalledWith(
+      expect.stringContaining('token=mockToken'),
+      expect.anything()
+    );
   });
 });

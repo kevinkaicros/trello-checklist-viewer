@@ -96,4 +96,47 @@ describe('Data Fetching Service', () => {
       expect.anything()
     );
   });
+
+  it('updateChecklistItemState retries with write scope on 401', async () => {
+    const mockRestApi = {
+      isAuthorized: vi.fn().mockResolvedValue(true),
+      getToken: vi.fn().mockResolvedValueOnce('oldToken').mockResolvedValueOnce('newToken'),
+      authorize: vi.fn().mockResolvedValue(undefined),
+    };
+    const mockTWithRest = {
+      ...mockT,
+      getRestApi: vi.fn().mockReturnValue(mockRestApi),
+    };
+
+    globalThis.fetch = vi.fn()
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 401,
+        statusText: 'Unauthorized'
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: () => Promise.resolve({}),
+        status: 200,
+      });
+
+    await updateChecklistItemState(
+      mockTWithRest as unknown as TrelloInstance,
+      'card1',
+      'cl1',
+      'item1',
+      'complete'
+    );
+
+    expect(mockRestApi.authorize).toHaveBeenCalledWith({ scope: 'read,write' });
+    expect(globalThis.fetch).toHaveBeenCalledTimes(2);
+    expect(globalThis.fetch).toHaveBeenNthCalledWith(1, 
+      expect.stringContaining('token=oldToken'),
+      expect.anything()
+    );
+    expect(globalThis.fetch).toHaveBeenNthCalledWith(2, 
+      expect.stringContaining('token=newToken'),
+      expect.anything()
+    );
+  });
 });

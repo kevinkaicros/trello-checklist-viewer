@@ -35,8 +35,8 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
   }
 
   cards.forEach((card) => {
-    // Get project name from the first label or "No Project"
-    const projectName = card.labels && card.labels.length > 0 ? card.labels[0].name : 'No Project';
+    // Get project name from the first label or the card name itself
+    const projectName = card.labels && card.labels.length > 0 ? card.labels[0].name : card.name;
 
     // const isCardMember = card.members && card.members.some(m => m.username.toLowerCase() === searchStr);
     
@@ -89,11 +89,7 @@ export const filterAndGroupItems = (cards: TrelloCard[], username: string): Grou
 
   // Convert to array and sort
   const result: GroupedItems[] = Object.keys(groups)
-    .sort((a, b) => {
-      if (a === 'No Project') return 1;
-      if (b === 'No Project') return -1;
-      return a.localeCompare(b);
-    })
+    .sort((a, b) => a.localeCompare(b))
     .map((pName) => ({
       projectName: pName,
       items: groups[pName],

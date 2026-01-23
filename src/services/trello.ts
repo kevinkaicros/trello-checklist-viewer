@@ -49,7 +49,10 @@ export const getTrello = (): TrelloInstance | null => {
     // NOTE: If this is the connector iframe, calling iframe() MIGHT confuse Trello if done too early.
     // But since this is lazy, it happens in useEffect.
     try {
-        tInstance = window.TrelloPowerUp.iframe();
+        tInstance = window.TrelloPowerUp.iframe({
+          appKey: 'f23a4b4318d7a4f0c74816c3b595be78',
+          appName: 'Checklist Viewer'
+        });
     } catch (e) {
         console.warn("Failed to initialize Trello iframe (this might be the connector iframe):", e);
     }

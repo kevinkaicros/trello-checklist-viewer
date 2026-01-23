@@ -27,7 +27,8 @@ export const initializePowerUp = () => {
           return t.modal({
             title: 'Checklist Viewer',
             url: url.toString(),
-            fullscreen: true,
+            // fullscreen: true, // Disable fullscreen to align title with content
+            height: 800, // Set a reasonable default height
           });
         },
       }];

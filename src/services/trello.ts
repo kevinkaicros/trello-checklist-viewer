@@ -17,7 +17,7 @@ export const initializePowerUp = () => {
           dark: iconDark,
           light: iconLight,
         },
-        text: '清單 Viewer',
+        text: 'Checklist Viewer',
         callback: function (t: TrelloInstance) {
           console.log('Trello Power-Up: Button clicked');
           // Append ?modal=true to differentiate context
@@ -32,6 +32,9 @@ export const initializePowerUp = () => {
         },
       }];
     },
+  }, {
+    appKey: 'f23a4b4318d7a4f0c74816c3b595be78',
+    appName: 'Checklist Viewer'
   });
   console.log('Trello Power-Up: Initialization called.');
 };
